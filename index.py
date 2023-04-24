@@ -65,7 +65,7 @@ def render_pages():
     pages = get_pages()
     for page in pages:
         template = env.get_template(f"{page.template}.html")
-        with open(f"_site/{page.slug}.html", "w") as out:
+        with open(f"docs/{page.slug}.html", "w") as out:
             out.write(template.render(name=NAME, personal=PERSONALDETAILS, navigation=pages, title=page.title,
                                       content=page.content))
 
@@ -78,12 +78,12 @@ def render_blog(filtered_tags=None):
                 posts.remove(post)
     pages = get_pages()
     template = env.get_template("blog.html")
-    with open(f"_site/blog.html", "w") as out:
+    with open(f"docs/blog.html", "w") as out:
         out.write(template.render(navigation=pages, tags=tags, posts=posts))
 
 
 def copy_assets():
-    shutil.copytree('./assets', '_site/', dirs_exist_ok=True)
+    shutil.copytree('./assets', 'docs/', dirs_exist_ok=True)
 
 
 if __name__ == "__main__":
